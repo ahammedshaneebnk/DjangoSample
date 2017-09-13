@@ -9,8 +9,10 @@ from django.http import HttpResponse
 # we want to use information from Album database so need to import it
 from .models import Album
 # for easy development, it is good to seperate frontend and backend
-# so for it, we use templates. To use it import loader from django.template
-from django.template import loader
+# so for it, we use templates.
+# combining template loading and running by importing render from shortcuts
+# and also avoiding HttpResponse and using render() function
+from django.shortcuts import render
 
 # define the function named as index
 # example
@@ -19,17 +21,12 @@ from django.template import loader
 def index(request):
     # we want to display the list of all albums. We access it by python command and assign it into a variable
     all_albums = Album.objects.all()
-    # variable for template (we put the template codes under templates/music/ but django automatically look into templates directory )
-    template = loader.get_template('music/index.html')
     # creating something as dictionary. more often it is named as context
     # context means information that our template needs
-    context = {
-        'all_albums': all_albums,
-    }
+    context = {'all_albums': all_albums}
     # view returns response to the request
-    # here, we have to return finalized template. Always pass context and request as arguments
-    return HttpResponse(template.render(context, request))
-
+    return render(request, 'music/index.html', context)
+    # actually HttpResponse is binded with render() function inbuilt
 
 # for /music/album_id/ eg:- /music/45/ so we need to pass album_id as parameter
 # so we need to connect with database and pull the data
