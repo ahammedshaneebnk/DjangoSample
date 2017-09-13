@@ -34,6 +34,7 @@ if __name__ == "__main__":
     # however to save, 'a.save()'
     # to show respective artist name, 'a.artist' and to show id, 'a.id' or 'a.pk' (primary key)
     # to show all object details, 'Album.objects.all()'
+    # to filter showing database, 'Album.objects.filter(artist__startswith='Artist')' for example
 
     # to create admin credential, 'python manage.py createsuperuser'
     # ahammedshaneebnk hello123
