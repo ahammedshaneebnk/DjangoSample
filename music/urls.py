@@ -18,5 +18,4 @@ urlpatterns = [
     # for it we need to group the ids together and call it as variable
     # here, (?P<album_id>) is used. ie, in actual, album_id replaces the original id of Album
     url(r'^(?P<album_id>[0-9]+)/$', views.detail, name='detail'),
-
 ]
