@@ -1,4 +1,4 @@
-"""py URL Configuration
+""""py URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.11/topics/http/urls/
@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+
 # url mapping is here
 # r'' means regular expression and inside'' is the actual expression
 # first parameter is the user request and next parameter is how to respond to it
