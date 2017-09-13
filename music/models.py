@@ -9,6 +9,8 @@ from django.db import models
 # we define each one as class
 # each class should inherit from 'models.Model'
 # Album class is defined as follows
+
+
 class Album(models.Model):
     artist = models.CharField(max_length=250)  # CharField means character datatype
     album_title = models.CharField(max_length=500)
@@ -22,13 +24,20 @@ class Album(models.Model):
 # first album will be assigned as id = 1 and id = 2 for second album etc.
 # so primary key is id of album
 
+    # when the details of this Album is called, we want to put some data in return
+    # eg:- if in command, 'Album.objects.all()' is called we want to return
+    # some information about this, here we give album title and artist as follows
+    def __str__(self):  # built in string representation of object
+        return self.album_title + ' - ' + self.artist
 
 # Song class is defined as follows
 # but we want to link Song with Album
 # An album may contain many songs but A song will be associated with an album
 # so there is a connection with Song class and Album class
-# we have to put that connction in below
+# we have to put that connection in below
 # we use ForeignKey for that purpose
+
+
 class Song(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE)  # Song is linked to Album
     # 'on_delete=models.CASCADE' means when an album is deleted, all songs associated-
@@ -42,7 +51,7 @@ class Song(models.Model):
 # it is as follows 'music.apps.MusicConfig' ie, in music directory, apps.py file-
 # there will be a function called MusicConfig. it is included in the main settings.py file
 
-# eventhough we have defined the blueprint of database, it is not synced with the original database
+# even though we have defined the blueprint of database, it is not synced with the original database
 # to do it just type as command line 'python manage.py makemigrations music'
 # then run migration my 'python manage.py migrate'
-# now thd database is synced with the above code
+# now the database is synced with the above code
