@@ -2,8 +2,8 @@
 # user request something probably a web page or some code and returns something
 # or something such as logout, download etc.
 # Create your views here.
-# we want to use information from Album database so need to import it
-from .models import Album
+# we want to use information from Album class and Song class so need to import it
+from .models import Album, Song
 # for easy development, it is good to seperate frontend and backend
 # so for it, we use templates.
 # combining template loading and running by importing render from shortcuts
@@ -38,6 +38,19 @@ def detail(request, album_id):
     # shortcut to replace try and except statements and we need to import get_object_or_4O4
     album = get_object_or_404(Album, pk=album_id)
     return render(request, 'music/detail.html', {'album': album})
-
-
 # album_id is integer. We convert it into a string by str() function
+
+
+def favorite(request, album_id):
+    album = get_object_or_404(Album, pk=album_id)
+    try:
+        selected_song = album.song_set.get(pk=request.POST['song'])
+    except (KeyError, Song.DoesNotExist):
+        return render(request, 'music/detail.html',
+                      {'album': album,
+                       'error_message': "You didn't select the valid song!",
+                       })
+    else:
+        selected_song.is_favorite = True
+        selected_song.save()
+        return render(request, 'music/detail.html', {'album': album})

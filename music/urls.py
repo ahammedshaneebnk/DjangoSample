@@ -18,8 +18,10 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     # then in views.py file, create a function named as index and tell the response there
 
-    # we need something like this /music/albumId/ for album details eg:- /music/21/
+    # we need something like this /music/<albumId>/ for album details eg:- /music/21/
     # for it we need to group the ids together and call it as variable
     # here, (?P<album_id>) is used. ie, in actual, album_id replaces the original id of Album
     url(r'^(?P<album_id>[0-9]+)/$', views.detail, name='detail'),
+    url(r'^(?P<album_id>[0-9]+)/favorite/$', views.favorite, name='favorite'),
+
 ]

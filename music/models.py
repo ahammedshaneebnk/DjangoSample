@@ -45,6 +45,7 @@ class Song(models.Model):
     # in some cases it may not be needed
     file_type = models.CharField(max_length=10)  # mp3 or avi or like that
     song_title = models.CharField(max_length=250)
+    is_favorite = models.BooleanField(default=False)
 
     def __str__(self):  # built in string representation of object
         return self.song_title
