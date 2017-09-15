@@ -8,9 +8,7 @@ from .models import Album
 # so for it, we use templates.
 # combining template loading and running by importing render from shortcuts
 # and also avoiding HttpResponse and using render() function
-from django.shortcuts import render
-# for displaying 4O4 error we have to import it
-from django.http import Http404
+from django.shortcuts import render, get_object_or_404
 
 
 # 4O4 usually means requested thing is not existing in the resources
@@ -32,10 +30,13 @@ def index(request):
 
 
 def detail(request, album_id):
-    try:
-        album = Album.objects.get(id=album_id)
-    except Album.DoesNotExist:
-        raise Http404("Album doesn't exist")
+    # try:
+    #     album = Album.objects.get(id=album_id)
+    # except Album.DoesNotExist:
+    #     raise Http404("Album doesn't exist")
+
+    # shortcut to replace try and except statements and we need to import get_object_or_4O4
+    album = get_object_or_404(Album, pk=album_id)
     return render(request, 'music/detail.html', {'album': album})
 
 
