@@ -29,6 +29,8 @@ def index(request):
 # for /music/album_id/ eg:- /music/45/ so we need to pass album_id as parameter
 # so we need to connect with database and pull the data
 # check the requested album_id existing and displaying respective responses
+
+
 def detail(request, album_id):
     try:
         album = Album.objects.get(id=album_id)

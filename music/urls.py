@@ -2,9 +2,13 @@
 # this then will be imported to main page url.py page
 # copy the first line import statement of main urls.py page to here
 from django.conf.urls import url
+
 # then import views of current directory
 # the dot(.) alone represents current directory
 from . import views
+
+# providing name space
+app_name = 'music'
 
 # copy the syntax structure from main urls.py page and edit it.
 # r'' means regular expression
