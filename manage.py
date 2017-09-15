@@ -38,3 +38,7 @@ if __name__ == "__main__":
 
     # to create admin credential, 'python manage.py createsuperuser'
     # ahammedshaneebnk hello123
+
+    # to add a song to album, 'a.song_set.create(song_title='', file_type='')' where 'a' is album object
+    # to get specific album, use 'Album.objects.get(pk=1)' example where pk is primary key
+    # to get number of songs in an album, 'a.song_set.count()'

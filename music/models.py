@@ -46,6 +46,9 @@ class Song(models.Model):
     file_type = models.CharField(max_length=10)  # mp3 or avi or like that
     song_title = models.CharField(max_length=250)
 
+    def __str__(self):  # built in string representation of object
+        return self.song_title
+
 # when this is finished, then main settings.py must be changed
 # under the INSTALLED APP section we want add something about the music app
 # it is as follows 'music.apps.MusicConfig' ie, in music directory, apps.py file-
