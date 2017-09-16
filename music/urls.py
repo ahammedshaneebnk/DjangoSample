@@ -18,4 +18,6 @@ urlpatterns = [
     # eg:- /music/13/
     # for DetailView, it asks for primary key so we use pk instead fo album_id
     url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
+
+    url(r'^album/add/$', views.CreateView.as_view(), name='album-add'),
 ]

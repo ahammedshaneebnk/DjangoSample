@@ -1,6 +1,8 @@
 # we use generic views
 from django.views import generic
 from .models import Album
+# for creating, updating, deleting views
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 # instead of functions, we now have classes
@@ -23,3 +25,12 @@ class DetailView(generic.DetailView):
     model = Album
     # once got model, specify template
     template_name = 'music/detail.html'
+
+
+# create album view so inherits from CreateView
+
+
+class AlbumCreate(CreateView):
+    model = Album
+    fields = ['artist', 'album_title', 'genre', 'album_logo']
+    # then edit url.py
