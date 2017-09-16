@@ -10,18 +10,12 @@ from . import views
 # providing name space
 app_name = 'music'
 
-# copy the syntax structure from main urls.py page and edit it.
-# r'' means regular expression
-# start with ^ and end with $
 urlpatterns = [
     # /music
-    url(r'^$', views.index, name='index'),
-    # then in views.py file, create a function named as index and tell the response there
+    # we are using classes but treat it as view
+    url(r'^$', views.IndexView.as_view(), name='index'),
 
-    # we need something like this /music/<albumId>/ for album details eg:- /music/21/
-    # for it we need to group the ids together and call it as variable
-    # here, (?P<album_id>) is used. ie, in actual, album_id replaces the original id of Album
-    url(r'^(?P<album_id>[0-9]+)/$', views.detail, name='detail'),
-    url(r'^(?P<album_id>[0-9]+)/favorite/$', views.favorite, name='favorite'),
-
+    # eg:- /music/13/
+    # for DetailView, it asks for primary key so we use pk instead fo album_id
+    url(r'^(?P<pk>[0-9]+)/$', views.DetailView.as_view(), name='detail'),
 ]

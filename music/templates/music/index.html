@@ -1,15 +1,17 @@
 {% extends 'music/base.html' %}
 
 {% block body %}
-{% if all_albums %}
-<h2>Here are all my albums</h2>
-<ul>
-    {% for album in all_albums %}
-    <li><a href="{% url 'music:detail' album.id %}">{{ album.album_title }}</a></li>
-    {% endfor %}
-</ul>
-{% else %}
-<h3>You don't have any albums!</h3>
-{% endif %}
+    {#    by default, when Album.objects.all() is called, the objects are stored in 'object_list'#}
+    {#    but we override it with what we want by using context_object_name there in views.py#}
+    {% if all_albums %}
+        <h2>Here are all my albums</h2>
+        <ul>
+            {% for album in all_albums %}
+                <li><a href="{% url 'music:detail' album.id %}">{{ album.album_title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h3>You don't have any albums!</h3>
+    {% endif %}
 {% endblock %}
 
