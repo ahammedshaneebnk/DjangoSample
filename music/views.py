@@ -34,3 +34,7 @@ class AlbumCreate(CreateView):
     model = Album
     fields = ['artist', 'album_title', 'genre', 'album_logo']
     # then edit url.py
+    # then create template
+    # the file name of model form (html) should be 'model name in lower cae + underscore
+    # +form' here, model is Album so 'album_form.html' and
+    # it should be under music-templates-music directory
