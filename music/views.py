@@ -3,6 +3,7 @@ from django.views import generic
 from .models import Album
 # for creating, updating, deleting views
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.core.urlresolvers import reverse_lazy  # for helping to delete view
 
 
 # instead of functions, we now have classes
@@ -28,8 +29,6 @@ class DetailView(generic.DetailView):
 
 
 # create album view so inherits from CreateView
-
-
 class AlbumCreate(CreateView):
     model = Album
     fields = ['artist', 'album_title', 'genre', 'album_logo']
@@ -38,3 +37,14 @@ class AlbumCreate(CreateView):
     # the file name of model form (html) should be 'model name in lower cae + underscore
     # +form' here, model is Album so 'album_form.html' and
     # it should be under music-templates-music directory
+
+
+class AlbumUpdate(UpdateView):
+    model = Album
+    fields = ['artist', 'album_title', 'genre', 'album_logo']
+
+
+class AlbumDelete(DeleteView):
+    model = Album
+    # on successful delete, redirect to homepage
+    success_url = reverse_lazy('music:index')
