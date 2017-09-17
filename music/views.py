@@ -4,6 +4,12 @@ from .models import Album
 # for creating, updating, deleting views
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy  # for helping to delete view
+# fro user registration and login
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.views import View
+from .forms import UserForm  # form class created in forms.py
+
 
 
 # instead of functions, we now have classes
@@ -48,3 +54,28 @@ class AlbumDelete(DeleteView):
     model = Album
     # on successful delete, redirect to homepage
     success_url = reverse_lazy('music:index')
+
+
+class UserFormView(View):
+    # specify model
+    form_class = UserForm
+    # once got model, specify template
+    template_name = 'music/registration_form.html'
+
+    # separate logic for GET method and POST method
+
+    # new user comes, display blank form
+    def get(self, request):
+        form = self.form_class(None)
+        return render(request, self.template_name, {{'form': form}})
+
+    # user fills the form, then process it
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            # to get clean data (normalized)
+            user = form.save(commit=False)
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user.set_password(password)
+            user.save()  # save to database
