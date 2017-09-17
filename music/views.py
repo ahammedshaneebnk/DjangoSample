@@ -67,7 +67,7 @@ class UserFormView(View):
     # new user comes, display blank form
     def get(self, request):
         form = self.form_class(None)
-        return render(request, self.template_name, {{'form': form}})
+        return render(request, self.template_name, {'form': form})
 
     # user fills the form, then process it
     def post(self, request):
@@ -79,3 +79,14 @@ class UserFormView(View):
             password = form.cleaned_data['password']
             user.set_password(password)
             user.save()  # save to database
+
+            # return User objects if the credentials are correct
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('music:index')
+
+        # return to blank form if form is not valid
+        return render(request, self.template_name, {{'form': form}})
+        # edit urls.py
